@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import cn.hzy.demo.dao.AccountDao;
 import cn.hzy.demo.model.Account;
+import cn.hzy.demo.service.AccountService;
 import cn.hzy.demo.service.UserService;
 
 public class JdbcTemplateTest {
@@ -31,8 +32,15 @@ public class JdbcTemplateTest {
 //		for(Account acc:accounts){
 //			System.out.println(acc);
 //		}
-		Account account = dao.findAccount();
+		Account account = dao.findAccount("zs");
 		System.out.println(account);
+	}
+	
+	@Test
+	public void transcationTest() {
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/application.xml");
+		AccountService service = (AccountService)applicationContext.getBean("accountService");
+		service.transferBalance("zs", "ls", 2f);
 	}
 		
 }

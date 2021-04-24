@@ -12,8 +12,10 @@ public interface AccountDao {
 	
 	void delete(int id);
 	
-	Account findAccount();
+	Account findAccount(String name);
 	
 	List<Account> findAccountList();
+	
+	void updateMoney(String name,float balance);
 	
 }

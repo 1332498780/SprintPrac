@@ -27,7 +27,7 @@ public class AccountDaoImpl implements AccountDao {
 				6.7f
 		};
 		int count = jdbcTemplate.update(sql, premeters);
-		System.out.println("²åÈë"+count+" ÐÐ");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½"+count+" ï¿½ï¿½");
 	}
 
 	@Override
@@ -43,11 +43,11 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	@Override
-	public Account findAccount() {
+	public Account findAccount(String name) {
 		String sql = "select * from account where name = ?";
 		Object[] premeters = new Object[] {
 //				"zs or 1=1"
-				"zs"
+				name
 		};
 		RowMapper<Account> rowMapper = new BeanPropertyRowMapper<Account>(Account.class);
 		
@@ -60,6 +60,16 @@ public class AccountDaoImpl implements AccountDao {
 		String sql = "select * from account";
 		RowMapper<Account> rowMapper = new BeanPropertyRowMapper<Account>(Account.class);
 		return jdbcTemplate.query(sql, rowMapper);
+	}
+
+	@Override
+	public void updateMoney(String name, float balance) {
+		String sql = "update account set balance = ? where name = ?";
+		Object[] premeters = new Object[] {
+			balance,
+			name
+		};
+		jdbcTemplate.update(sql, premeters);
 	}
 
 }
