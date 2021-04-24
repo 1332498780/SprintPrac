@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 开启注解扫描 -->
+	<context:component-scan base-package="cn.hzy.demo"></context:component-scan>
+	
+	<!-- 启动基于注解的aspectj -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<!--  
+	<bean id="userDao" class="cn.hzy.demo.dao.UserDao"></bean>
+	<bean id="groupDao" class="cn.hzy.demo.dao.GroupDao"></bean>
+	<bean id="userService" class="cn.hzy.demo.service.UserServiceImpl" name="xixihaha">
+		<constructor-arg index="0" name="userDao" ref="userDao"></constructor-arg>
+	</bean>
+	-->
+	
+	<!--  
+	<bean id="springAop" class="cn.hzy.demo.springaop.MySpringAop"></bean>
+	<bean id="userServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces" value="cn.hzy.demo.service.UserService"></property>
+		<property name="target" ref="userService"></property>
+		<property name="interceptorNames" value="springAop"></property>
+		<property name="proxyTargetClass" value="true"></property>
+	</bean>
+	-->
+	<!--
+	<bean id="aspectJAop" class="cn.hzy.demo.springaop.AspectJAspect"/>
+	<aop:config>
+		
+		<aop:aspect id="myAspect" ref="aspectJAop">
+			<aop:pointcut expression="execution(* cn.hzy.demo.service.UserServiceImpl.sayHello(..))" id="commonPointCut"/>
+			 
+			<aop:before method="before" pointcut-ref="commonPointCut"/>
+			
+			<aop:after-returning method="afterReturning" pointcut-ref="commonPointCut"/>
+			<aop:around method="around" pointcut-ref="commonPointCut"/>
+			<aop:after-throwing method="afterThrowing" pointcut-ref="commonPointCut" throwing="e"/>
+			 
+			<aop:after method="after" pointcut-ref="commonPointCut"/>
+		</aop:aspect>
+	</aop:config>
+	-->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		<property name="url" value="jdbc:mysql://localhost:3306/spring?serverTimezone=UTC" />
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+</beans>
