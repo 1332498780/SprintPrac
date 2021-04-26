@@ -4,29 +4,14 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-<!-- 元素有顺序 -->
-<properties resource="db.properties"></properties>
-
 <settings>
-	<setting name="logImpl" value="STDOUT_LOGGING"/>
-</settings>
-
+       <!-- 打印sql日志 -->
+       <setting name="logImpl" value="STDOUT_LOGGING" />
+   </settings>
 <typeAliases>
-	<typeAlias type="cn.hzy.demo.model.Customer" alias="customer" />
+	<package name="cn.hzy.demo.model"/>
 </typeAliases>
 
- <environments default="mysql">
-	 <environment id="mysql">
-		 <transactionManager type="JDBC"/>
-			 <dataSource type="POOLED">
-			 <property name="driver" value="${jdbc.driver}"/>
-			 <property name="url" value="${jdbc.url}"/>
-			 <property name="username" value="${jdbc.username}"/>
-			 <property name="password" value="${jdbc.password}"/>
-		 </dataSource>
-	 </environment>
- </environments>
- 
  <mappers>
   <mapper resource="cn/hzy/demo/mapper/CustomerMapper.xml"/> 
   <mapper resource="cn/hzy/demo/mapper/PersonMapper.xml"/> 
@@ -37,5 +22,4 @@
   <package name="cn/hzydemo/mapper"/> 
   --> 
  </mappers>
- 
 </configuration>

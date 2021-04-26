@@ -1,0 +1,11 @@
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hzy.demo.mapper.ProductMapper">
+
+ 	<select id="findProductByItemId" parameterType="Integer" resultType="product">
+ 		select * from product where id in(
+ 			select product_id from item_product where item_id = ${id}
+ 		)
+ 	</select>
+</mapper>
