@@ -2,7 +2,21 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.hzy.demo.mapper.CustomerMapper">
- 	<select id="findCustomerById" parameterType="Integer" resultType="cn.hzy.demo.model.Customer">
+ 	<select id="findCustomerById" parameterType="int" resultType="customer">
  		select * from t_customer where id = #{id}
+ 	</select>
+ 	<sql id="tableName">t_customer</sql>
+ 	<select id="findCustomerByName" parameterType="customer" resultType="customer">
+ 	
+ 		select * from <include refid="tableName"></include>
+ 		<where>
+ 			<if test="name != ''">
+ 				and name like concat('%',#{name},'%')
+ 			</if>
+ 			<if test="jobs != ''">
+ 				and jobs like #{jobs}
+ 			</if>
+ 		</where>
+ 		
  	</select>
 </mapper>
