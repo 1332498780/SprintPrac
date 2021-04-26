@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hzy.demo.mapper.PersonMapper">
+	
+	<resultMap type="person" id="personResultMap">
+		<id column="id" property="id"/>
+		<result property="name" column="name"/>
+		<association fetchType="lazy" property="idCard" javaType="idCard" column="card_id" select="cn.hzy.demo.mapper.IdCardMapper.findIdCardById" />
+		<collection property="items" fetchType="lazy" column="id" ofType="items" select="cn.hzy.demo.mapper.ItemsMapper.findItemsByPid" />
+		<collection property="items" fetchType="lazy" column="id" ofType="items" select="cn.hzy.demo.mapper.ItemsMapper.findItemsByPid" />
+	</resultMap>
+
+ 	<select id="findPersonById" parameterType="Integer" resultMap="personResultMap">
+ 		select * from person where id = #{id}
+ 	</select>
+</mapper>
