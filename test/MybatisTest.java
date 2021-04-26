@@ -31,11 +31,7 @@ public class MybatisTest {
 	}
 	
 	@Test
-<<<<<<< HEAD
-	public void findByNameTest() {
-=======
 	public void findPersonTest() {
->>>>>>> origin/master
 		InputStream inputStream = null;
 		try {
 			inputStream = Resources.getResourceAsStream("mybatis/mybatis-config.xml");
@@ -45,21 +41,12 @@ public class MybatisTest {
 		}
 		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		SqlSession sqlSession = sessionFactory.openSession();
-<<<<<<< HEAD
-		Customer cus = new Customer();
-		cus.setName("s");
-		cus.setJobs("teacher");
-		List<Customer> customers = sqlSession
-				.selectList("cn.hzy.demo.mapper.CustomerMapper.findCustomerByName", cus);
-		System.out.println(customers);
-=======
+
 		
 		Person person = sqlSession.selectOne("cn.hzy.demo.mapper.PersonMapper.findPersonById", 1);
 		System.out.println(person.getName());
 //		System.out.println(person.getIdCard());
 		System.out.println(person.getItems());
 		
-		
->>>>>>> origin/master
 	}
 }
